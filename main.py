@@ -69,7 +69,14 @@ async def jojo_reference_handler(message: Message):
 # To handle random messages which aren't connected to the functionality of the bot
 @dp.message()
 async def unknown_message_handler(message: Message):
-    await message.answer(text=unknown_message_response_text)
+    prev_message = await message.answer(text=unknown_message_response_text)
+    with shelve.open(chat_message_db_path) as chat_msg_db:
+        if str(prev_message.from_user.id) in list(chat_msg_db.keys()):
+            await bot.delete_message(
+                chat_id=message.from_user.id,
+                message_id=chat_msg_db[str(prev_message.from_user.id)]
+            )
+        chat_msg_db[str(prev_message.from_user.id)] = prev_message.message_id
 
 
 async def main():

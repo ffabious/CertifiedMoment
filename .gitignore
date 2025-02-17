@@ -2,3 +2,4 @@ static/info.py
 
 __pycache__
 .venv
+db/*

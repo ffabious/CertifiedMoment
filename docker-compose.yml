@@ -1,0 +1,8 @@
+services:
+  bot:
+    build: .
+    volumes:
+      - cmvolume:/app/db
+volumes:
+  cmvolume:
+    external: true
