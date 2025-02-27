@@ -1,5 +1,6 @@
 services:
   bot:
+    image: naixuu/certifiedmoment
     build: .
     volumes:
       - cmvolume:/app/db
